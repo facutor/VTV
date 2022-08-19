@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Inspeccion</title>
+    
+    <!--JQUERY-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+   
+	<!--BOOTSTRAP 4-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">    
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>    
+    
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/registerStyles.css}">
+    
+</head>
+<body>
+        <!--ENCABEZADO-->
+        <header class="header">
+			<div class="header__contenedor">
+				<a th:href="@{/}" class="header__logo" >INICIO</a>
+				
+                <nav class="nav">
+					<a class="dropdown-toggle nav__enlace" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" 
+						aria-haspopup="true" aria-expanded="false">
+						Agregar
+					</a>
+					<ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
+						<li><a th:href="@{/inspectores/new}" class="dropdown-item">Agregar Inspector</a></li>
+						<li><a th:href="@{/vehiculos/new}" class="dropdown-item">Agregar Vehiculo</a></li>
+						<li><a th:href="@{/conductores/new}" class="dropdown-item">Agregar Conductor</a></li>
+
+					</ul>
+							
+						<a class="nav__enlace" th:href="@{/inspecciones/lista}">Listar Inpecciones Por Dueño</a>
+						<a class="nav__enlace" th:href="@{/inspecciones/estado}" >Listar Inspecciones por Estado</a>
+				
+				
+			</nav>
+			</div>
+        </header>
+
+        <!--FORMULARIO-->
+        <main>
+            <h1 class="titulo">Complete el formulario</h1>
+
+
+
+            <form th:action="@{/inspecciones/save}" th:object="${inspeccion}" method="POST" class="form" id="form">
+	             <input th:field="${inspeccion.idVehiculoInspector}" type="hidden">
+                
+                <div class="form__grupo" id="grupo__medicion">
+                    <label for="medicion" class="form__label">MEDICION: </label>
+                    <div class="form__grupo-input">
+                    
+                        <select th:field="${inspeccion.medicion}" class="custom-select">
+                            <!--<option disabled class="form__select-option">Tipo de Documento</option> -->
+                            <option th:each="t : ${tipos}" th:value="${t}"  th:text="${t}"  class="form__select-option" value=""></option>
+                         
+                        </select>
+                        
+                    </div>
+                </div>
+                <!--OBSERVACION-->
+                   <div class="form__grupo" id="grupo__observacion">
+                         <label for="observacion" class="form__label">OBSERVACION: </label>
+                    <div class="form__grupo-input">
+                    
+                        <select th:field="${inspeccion.observacion}" class="custom-select">
+                            <!--<option disabled class="form__select-option">Tipo de Documento</option> -->
+                            <option th:each="t : ${tipos}" th:value="${t}"  th:text="${t}"  class="form__select-option" value=""></option>
+                         
+                        </select>
+                        
+                    </div>
+                </div>
+                
+                                <!--ELEGIR VEHICULO-->
+               <div class="form__grupo">
+                    <label for="vehiculo" class="form__label">Elegir vehiculo: </label>
+                    <div class="form__grupo-input">
+                    
+                        <select  th:field="${vehiculo.dominio}" class="custom-select">
+                            <!--<option disabled class="form__select-option">Tipo de Documento</option> -->
+                            <option th:each="v : ${vehiculos}" th:value="${v.dominio}" th:text="${v.dominio}" class="form__select-option" value=""></option>
+                         
+                        </select>
+                        
+                    </div>
+                </div>
+                 
+                                <!--ELEGIR Inspector-->
+                <div class="form__grupo">
+                    <label for="inspector" class="form__label">Elegir Inspector: </label>
+                    <div class="form__grupo-input">
+                    
+                        <select  th:field="${inspector.dni}" class="custom-select">
+                            <!--<option disabled class="form__select-option">Tipo de Documento</option> -->
+                            <option th:each="i : ${inspectores}" th:value="${i.dni}" th:text="${i.dni}" class="form__select-option" value=""></option>
+                         
+                        </select>
+                        
+                    </div>
+                </div>                
+                
+              
+            
+                <!--MSG DE ERROR-->
+                <div class="form__msg-error" id="form__msg-error">
+                    <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Porfavor rellene el formulario correctamente</p>
+                </div>
+    
+                <!--BUTTON-->
+                <div class="form__grupo form__grupo-button-enviar">
+                    <button th:if="${editMode == null}" class="form__button" type="submit">AGREGAR</button>
+                     <button th:if="${editMode == true}" class="form__button" type="submit">MODIFICAR</button>
+                </div>
+                
+           
+            </form>
+             <div class="alert-danger text-center" th:if="${errorMsg != null}" th:text="${errorMsg}"></div>
+        </main>
+    
+		<!--FOOTER-->
+		<footer>
+			<p id="derechos-info" class="derechos__info">Copyright ©
+				<script>document.write(new Date().getFullYear());</script>
+				Todos los derechos reservados
+			</p>
+			<div class="redes-sociales">
+				<a href="https://github.com/facutor/pruebatecnca" target="_BLANK" class="redes-sociales__red"><i
+						class="fab fa-github"></i> </a>
+			</div>
+		</footer>
+   
+  
+       
+</body>
+</html>
