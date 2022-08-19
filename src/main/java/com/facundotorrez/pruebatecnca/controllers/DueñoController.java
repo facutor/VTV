@@ -56,7 +56,7 @@ public class DueñoController {
 		if(d.isEmpty()) {
 			return new ResponseEntity<String>("Este usuario no existe", HttpStatus.BAD_REQUEST);
 		}else {
-			dueñoModificado.setIdDueño(id);
+			dueñoModificado.setIdPersona(id);
 			return new ResponseEntity<Dueño>(dueñoService.saveOrUpdate(dueñoModificado), HttpStatus.OK);
 		}
 	}

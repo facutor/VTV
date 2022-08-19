@@ -67,7 +67,7 @@ public class InspectorController {
 		if(i.isEmpty()) {
 			return new ResponseEntity<String>("Este inspector no existe", HttpStatus.BAD_REQUEST);
 		}else {
-			inspectorModificado.setIdInspector(id);
+			inspectorModificado.setIdPersona(id);
 			return new ResponseEntity<Inspector>(inspectorService.saveOrUpdate(inspectorModificado), HttpStatus.OK);
 		}
 	}

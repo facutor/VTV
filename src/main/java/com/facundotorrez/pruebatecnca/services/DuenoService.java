@@ -36,7 +36,7 @@ public class DuenoService implements IDueñoService {
 	@Override
 	public Dueño saveOrUpdate(Dueño dueño){
 		// TODO Auto-generated method stub
-		Optional<Dueño> dueñobd = dueñoRepository.findById(dueño.getIdDueño());
+		Optional<Dueño> dueñobd = dueñoRepository.findById(dueño.getIdPersona());
 		if( dueñobd.isEmpty() ) {
 			System.out.println("ENTRA ACA"+dueño.getTipo().values());
 			return dueñoRepository.save(dueño);

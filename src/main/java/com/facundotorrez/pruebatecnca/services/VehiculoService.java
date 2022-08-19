@@ -50,9 +50,6 @@ public class VehiculoService implements IVehiculoService{
 		if(vehiculoModificado.getMarca()!=null) {
 			preModificado.setMarca(vehiculoModificado.getMarca());
 		}
-		if(vehiculoModificado.getModelo()!=null) {
-			preModificado.setModelo(vehiculoModificado.getModelo());
-		}
 		if(vehiculoModificado.getDominio()!=null) {
 			preModificado.setDominio(vehiculoModificado.getDominio());
 		}

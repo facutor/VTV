@@ -37,7 +37,7 @@ public class InspectorService implements IInspectorService{
 	@Override
 	public Inspector saveOrUpdate(Inspector inspector) {
 		// TODO Auto-generated method stub
-		int idInspector = inspector.getIdInspector();
+		int idInspector = inspector.getIdPersona();
 		Optional<Inspector> inspectorbd = inspectorRepository.findById(idInspector);
 		if( inspectorbd.isEmpty() ) {
 			return inspectorRepository.save(inspector);

@@ -75,8 +75,8 @@
 						<tbody class="tabla__body">
 							<tr th:each="v:${vehiculos}" class="tabla__row-body">
 								<td th:text="${v.dominio}" class="tabla__body-dato"></td>
-								<td th:text="${v.marca}" class="tabla__body-dato"></td>
-								<td th:text="${v.modelo}" class="tabla__body-dato"></td>
+								<td th:text="${v.marca.marca}" class="tabla__body-dato"></td>
+								<td th:text="${v.marca.modelo.modelo}" class="tabla__body-dato"></td>
 								<td th:text="${v.duenio.dni}" class="tabla__body-dato"></td>
 								<td th:text="${v.duenio.nombre}" class="tabla__body-dato"></td>
 								<td th:text="${v.duenio.apellido}" class="tabla__body-dato"></td>
@@ -106,8 +106,8 @@
 								<td th:text="${v.nombre}" class="tabla__body-dato"></td>
 								<td th:text="${v.apellido}" class="tabla__body-dato"></td>
 								<td class="tabla__body-dato">
-		                            <a th:href="@{/inspectores/edit/}+${v.idInspector}" class="tabla__boton-editar" href="#"><i class="fas fa-edit"></i></a>
-		                            <a th:onclick="eliminarInspector([[${v.idInspector}]])"  class="tabla__boton-eliminar" href="#" ><i class="fas fa-user-times"></i></a>
+		                            <a th:href="@{/inspectores/edit/}+${v.idPersona}" class="tabla__boton-editar" href="#"><i class="fas fa-edit"></i></a>
+		                            <a th:onclick="eliminarInspector([[${v.idPersona}]])"  class="tabla__boton-eliminar" href="#" ><i class="fas fa-user-times"></i></a>
 		                        </td>
 							</tr>
 						</tbody>

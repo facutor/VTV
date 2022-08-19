@@ -15,7 +15,7 @@ public interface IVehiculoInspectorRepository extends JpaRepository<VehiculoInsp
 	@Query("SELECT  i FROM VehiculoInspector i JOIN FETCH i.vehiculo JOIN FETCH i.inspector")
 	List<VehiculoInspector> listarInspecciones();
 	
-	@Query("SELECT i FROM VehiculoInspector i JOIN FETCH i.vehiculo v where v.duenio.idDueño=(:idDueño)")
+	@Query("SELECT i FROM VehiculoInspector i JOIN FETCH i.vehiculo v where v.duenio.idPersona=(:idDueño)")
 	public List<VehiculoInspector> findInspeccionByIdDueño(@Param("idDueño")int idDueño);
 	
 	@Query("SELECT i FROM VehiculoInspector i JOIN FETCH i.vehiculo where i.estado = (:estado)")

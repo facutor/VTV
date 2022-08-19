@@ -12,9 +12,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -68,5 +70,21 @@ public class UsuarioService implements IUsuarioService , UserDetailsService{
 		}
 		return new ArrayList<GrantedAuthority>(grantedAuthorities);
 	}
+	
+	public Usuario traerUserLogueado() {
+
+		String currentUserName = "";
+		Usuario user = null;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			currentUserName = authentication.getName();
+			System.out.println("TOKEN"+authentication.getCredentials());
+			user = usuarioRepository.findByUsernameAndFetchUserRolesEagerly(currentUserName);
+		}
+
+		return user;		
+	 
+	};
 
 }

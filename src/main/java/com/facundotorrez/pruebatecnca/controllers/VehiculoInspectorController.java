@@ -124,7 +124,7 @@ public class VehiculoInspectorController {
 	@PostMapping("/filtrarPorDueño")
 	public String traerPorDniDueño(@Validated @ModelAttribute("duenio") Dueño dueño, Model model) throws Exception{
 		Optional<Dueño> d= dueñoService.listarDNI(dueño.getDni());
-		List<VehiculoInspector> inspecciones = vhService.traerInspeccionesPorIdDueño(d.get().getIdDueño());
+		List<VehiculoInspector> inspecciones = vhService.traerInspeccionesPorIdDueño(d.get().getIdPersona());
 		model.addAttribute("inspecciones", inspecciones);
 		model.addAttribute("duenios", dueñoService.listar());
 		model.addAttribute("duenio", new Dueño());

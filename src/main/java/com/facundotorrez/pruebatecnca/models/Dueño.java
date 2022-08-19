@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -22,20 +23,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="duenios")
-public class Dueño {
-	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY )
-	private int idDueño;
-	
-	@Column(name="nombre", nullable=false, length=45)
-	private String nombre;
-	
-	@Column(name="apellido", nullable=false, length=45)
-	private String apellido;
-	
-	@Column(name="dni", nullable=false)
-	private long dni;
-	
+@PrimaryKeyJoinColumn(name = "idDuenio")
+public class Dueño extends Persona{
 	@Column(name="createdat")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
@@ -61,48 +50,13 @@ public class Dueño {
 		super();
 	}
 
-	public Dueño(int idDueño, String nombre, String apellido, long dni, LocalDateTime createdAt,
-			LocalDateTime updatedAt, TipoDueño tipo) {
-		super();
-		this.idDueño = idDueño;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.dni = dni;
+	public Dueño(String nombre, String apellido, long dni, LocalDateTime createdAt, LocalDateTime updatedAt,
+			Set<Vehiculo> vehiculos, TipoDueño tipo) {
+		super(nombre, apellido, dni);
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.vehiculos = vehiculos;
 		this.tipo = tipo;
-	}
-
-	public int getIdDueño() {
-		return idDueño;
-	}
-
-	public void setIdDueño(int idDueño) {
-		this.idDueño = idDueño;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public long getDni() {
-		return dni;
-	}
-
-	public void setDni(long dni) {
-		this.dni = dni;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -133,15 +87,17 @@ public class Dueño {
 		return tipo;
 	}
 
-	public void setTipo(TipoDueño tipoDueño) {
-		this.tipo = tipoDueño;
+	public void setTipo(TipoDueño tipo) {
+		this.tipo = tipo;
 	}
 
 	@Override
 	public String toString() {
-		return "Dueño [idDueño=" + idDueño + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", tipoDueño=" + tipo + "]";
+		return "Dueño [createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", vehiculos=" + vehiculos + ", tipo="
+				+ tipo + "]";
 	}
+
+	
 	
 	
 	

@@ -29,14 +29,12 @@ public class Vehiculo {
 	@GeneratedValue(strategy =GenerationType.IDENTITY )
 	private int idVehiculo;
 	
-	@Column(name="marca", nullable=false, length=45)
-	private String marca;
+	@ManyToOne
+	@JoinColumn(name="id_marca",nullable=false)
+	private Marca marca;
 	
 	@Column(name="dominio", nullable=false, length=45)
 	private String dominio;
-	
-	@Column(name="modelo", nullable=false,length = 45)
-	private String modelo;
 	
 	@Column(name="createdat")
 	@CreationTimestamp
@@ -60,12 +58,11 @@ public class Vehiculo {
 
 
 
-	public Vehiculo(String marca, String dominio, String modelo, LocalDateTime createdAt, LocalDateTime updatedAt,
+	public Vehiculo(Marca marca, String dominio, LocalDateTime createdAt, LocalDateTime updatedAt,
 			Dueño duenio) {
 		super();
 		this.marca = marca;
 		this.dominio = dominio;
-		this.modelo = modelo;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.duenio = duenio;
@@ -84,12 +81,12 @@ public class Vehiculo {
 	}
 
 
-	public String getMarca() {
+	public Marca getMarca() {
 		return marca;
 	}
 
 
-	public void setMarca(String marca) {
+	public void setMarca(Marca marca) {
 		this.marca = marca;
 	}
 
@@ -103,15 +100,6 @@ public class Vehiculo {
 		this.dominio = dominio;
 	}
 
-
-	public String getModelo() {
-		return modelo;
-	}
-
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
 
 
 	public LocalDateTime getCreatedAt() {
@@ -166,8 +154,7 @@ public class Vehiculo {
 
 	@Override
 	public String toString() {
-		return "Vehiculo [idVehiculo=" + idVehiculo + ", marca=" + marca + ", dominio=" + dominio + ", modelo=" + modelo
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", duenio=" + duenio + "]";
+		return "Vehiculo [idVehiculo=" + idVehiculo + ", marca=" + marca + ", dominio=" + dominio + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", duenio=" + duenio + "]";
 	}
 
 
