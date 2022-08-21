@@ -54,7 +54,7 @@
 
 
             <form th:action="@{/inspectores/save}" th:object="${inspector}" method="POST" class="form" id="form">
-	             <input th:field="${inspector.idInspector}" type="hidden">
+	             <input th:field="${inspector.idPersona}" type="hidden">
                 <!--APELLIDO-->
                 <div class="form__grupo" id="grupo__apellido">
                     <label for="apellido" class="form__label">Apellido</label>
