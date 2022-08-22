@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="marca")
 public class Marca {
@@ -25,11 +28,13 @@ public class Marca {
 	@Column(name="marca", nullable=false, length=45)
 	private String marca;
 	
-	@ManyToOne
-	@JoinColumn(name="id_modelo",nullable=false)
-	private Modelo modelo;
 	
 	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="marca")
+	@JsonIgnore
+	private Set<Modelo> modelos;
+	
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="marca")
+	@JsonIgnore
 	private Set<Vehiculo> vehiculos;
 
 
@@ -38,12 +43,19 @@ public class Marca {
 	}
 
 
-	public Marca(String marca, Modelo modelo, Set<Vehiculo> vehiculos) {
+	
+
+
+	public Marca(int idMarca, String marca, Set<Modelo> modelos, Set<Vehiculo> vehiculos) {
 		super();
+		this.idMarca = idMarca;
 		this.marca = marca;
-		this.modelo = modelo;
+		this.modelos = modelos;
 		this.vehiculos = vehiculos;
 	}
+
+
+
 
 
 	public int getIdMarca() {
@@ -66,14 +78,22 @@ public class Marca {
 	}
 
 
-	public Modelo getModelo() {
-		return modelo;
+	
+
+	public Set<Modelo> getModelos() {
+		return modelos;
 	}
 
 
-	public void setModelo(Modelo modelo) {
-		this.modelo = modelo;
+
+
+
+	public void setModelos(Set<Modelo> modelos) {
+		this.modelos = modelos;
 	}
+
+
+
 
 
 	public Set<Vehiculo> getVehiculos() {
@@ -86,11 +106,17 @@ public class Marca {
 	}
 
 
+
+
+
 	@Override
 	public String toString() {
-		return "Marca [idMarca=" + idMarca + ", marca=" + marca + ", modelo=" + modelo + ", vehiculos=" + vehiculos
+		return "Marca [idMarca=" + idMarca + ", marca=" + marca + ", modelos=" + modelos + ", vehiculos=" + vehiculos
 				+ "]";
 	}
+
+
+	
 	
 	
 	

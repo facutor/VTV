@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -35,6 +36,7 @@ public class Inspector extends Persona{
 	private LocalDateTime updatedAt;
 	
 	@OneToMany(mappedBy = "inspector",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<VehiculoInspector> vehiculosInspectores = new HashSet<>();
 	
 	

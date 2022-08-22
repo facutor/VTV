@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import com.facundotorrez.pruebatecnca.interfaceServices.IDueñoService;
+import com.facundotorrez.pruebatecnca.interfaceServices.IMarcaService;
+import com.facundotorrez.pruebatecnca.interfaceServices.IModeloService;
 import com.facundotorrez.pruebatecnca.interfaceServices.IVehiculoService;
 import com.facundotorrez.pruebatecnca.models.Dueño;
 import com.facundotorrez.pruebatecnca.models.Inspector;
@@ -31,6 +33,11 @@ public class VehiculoController {
 	private IVehiculoService vehiculoService;
 	@Autowired
 	private IDueñoService dueñoService;
+	@Autowired 
+	private IMarcaService marcaService;
+	
+	@Autowired
+	private IModeloService modeloService;
 	
 	@GetMapping("/lista")
 	public ResponseEntity<?> traerVehiculos(){
@@ -98,6 +105,8 @@ public class VehiculoController {
 		model.addAttribute("vehiculo",new Vehiculo());
 
 		model.addAttribute("conductores", dueñoService.listar());
+		model.addAttribute("marcas", marcaService.listar());
+		model.addAttribute("modelos", modeloService.listar());
 		return "vehiculo/agregarVehiculo";
 	}
 	@GetMapping("/edit/{idVehiculo}")

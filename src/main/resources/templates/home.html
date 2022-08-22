@@ -76,7 +76,7 @@
 							<tr th:each="v:${vehiculos}" class="tabla__row-body">
 								<td th:text="${v.dominio}" class="tabla__body-dato"></td>
 								<td th:text="${v.marca.marca}" class="tabla__body-dato"></td>
-								<td th:text="${v.marca.modelo.modelo}" class="tabla__body-dato"></td>
+								<td th:text="${v.modelo.modelo}" class="tabla__body-dato"></td>
 								<td th:text="${v.duenio.dni}" class="tabla__body-dato"></td>
 								<td th:text="${v.duenio.nombre}" class="tabla__body-dato"></td>
 								<td th:text="${v.duenio.apellido}" class="tabla__body-dato"></td>

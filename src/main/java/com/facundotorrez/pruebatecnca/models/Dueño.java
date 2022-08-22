@@ -20,6 +20,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="duenios")
@@ -33,8 +34,9 @@ public class Dueño extends Persona{
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@JsonBackReference
+	
 	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="duenio")
+	@JsonIgnore
 	private Set<Vehiculo> vehiculos;
 	
 	@Column(name="tipo", nullable = false )

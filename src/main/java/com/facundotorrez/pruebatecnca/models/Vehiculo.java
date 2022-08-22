@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -32,6 +33,11 @@ public class Vehiculo {
 	@ManyToOne
 	@JoinColumn(name="id_marca",nullable=false)
 	private Marca marca;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="id_modelo",nullable=false)
+	private Modelo modelo;
 	
 	@Column(name="dominio", nullable=false, length=45)
 	private String dominio;
@@ -49,6 +55,7 @@ public class Vehiculo {
 	private Dueño duenio;
 	
 	@OneToMany(mappedBy = "vehiculo",fetch = FetchType.LAZY, orphanRemoval = true )
+	@JsonIgnore
 	private Set<VehiculoInspector> vehiculosInspectores = new HashSet<>();
 
 	public Vehiculo() {
@@ -58,15 +65,24 @@ public class Vehiculo {
 
 
 
-	public Vehiculo(Marca marca, String dominio, LocalDateTime createdAt, LocalDateTime updatedAt,
-			Dueño duenio) {
+
+	public Vehiculo(int idVehiculo, Marca marca, String dominio, LocalDateTime createdAt,
+			LocalDateTime updatedAt, Dueño duenio, Set<VehiculoInspector> vehiculosInspectores) {
 		super();
+		this.idVehiculo = idVehiculo;
 		this.marca = marca;
+		
 		this.dominio = dominio;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.duenio = duenio;
+		this.vehiculosInspectores = vehiculosInspectores;
 	}
+
+
+
+
+
 
 
 
@@ -148,6 +164,24 @@ public class Vehiculo {
 	public void setVehiculosInspectores(Set<VehiculoInspector> vehiculosInspectores) {
 		this.vehiculosInspectores = vehiculosInspectores;
 	}
+	
+
+
+
+	public Modelo getModelo() {
+		return modelo;
+	}
+
+
+
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
+
+
+
+
+
 
 
 

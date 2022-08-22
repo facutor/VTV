@@ -68,18 +68,26 @@
                 <div class="form__grupo" id="grupo__marca">
                     <label for="marca" class="form__label">Marca</label>
                     <div class="form__grupo-input">
-                        <input th:field="${vehiculo.marca}" type="text" name="marca" class="form__input" id="marca">
-                        <i class="fas fa-times-circle form__validacion-estado"></i>
+                        <select th:field="${vehiculo.marca.idMarca}" required class="custom-select" >
+                            <!--option disabled class="form__select-option">Tipo de Usuario</option>-->
+                            <option text="Elija una opcion" class="form__select-option" default  value=0 />
+                            <option th:each="marca:${marcas}" th:value="${marca.idMarca}"  th:text="${marca.marca}" class="form__select-option" />
+                          
+                        </select>
                     </div>
                     <p class="form__error-input-msg">El vehiculo solo puede contener letras y espacios</p>
                 </div>
                 
                 <!--Modelo-->
-                <div class="form__grupo" id="grupo__modelo">
+                
+                <div  class="form__grupo" id="grupo__modelo">
                     <label for="modelo" class="form__label">Modelo</label>
                     <div class="form__grupo-input">
-                        <input th:field="${vehiculo.modelo}" type="text" name="modelo" class="form__input" id="modelo">
-                        <i class="fas fa-times-circle form__validacion-estado"></i>
+                        <select th:field="${vehiculo.modelo.idModelo}" required class="custom-select" >
+                            <!--option disabled class="form__select-option">Tipo de Usuario</option>-->
+                            <option th:each="modelos:${vehiculo.marca.modelos}" th:value="${modelos.idModelo}"  th:text="${modelos.modelo}" class="form__select-option" />
+                          
+                        </select>
                     </div>
                     <p class="form__error-input-msg">El vehiculo solo puede contener letras y espacios</p>
                 </div>   
