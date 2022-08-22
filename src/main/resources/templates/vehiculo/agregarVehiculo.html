@@ -70,7 +70,7 @@
                     <div class="form__grupo-input">
                         <select th:field="${vehiculo.marca.idMarca}" required class="custom-select" >
                             <!--option disabled class="form__select-option">Tipo de Usuario</option>-->
-                            <option text="Elija una opcion" class="form__select-option" default  value=0 />
+                            
                             <option th:each="marca:${marcas}" th:value="${marca.idMarca}"  th:text="${marca.marca}" class="form__select-option" />
                           
                         </select>
@@ -85,11 +85,11 @@
                     <div class="form__grupo-input">
                         <select th:field="${vehiculo.modelo.idModelo}" required class="custom-select" >
                             <!--option disabled class="form__select-option">Tipo de Usuario</option>-->
-                            <option th:each="modelos:${vehiculo.marca.modelos}" th:value="${modelos.idModelo}"  th:text="${modelos.modelo}" class="form__select-option" />
+                            <option th:each="modelo:${modelos}" th:value="${modelo.idModelo}"  th:text="${modelo.modelo}" class="form__select-option" />
                           
                         </select>
                     </div>
-                    <p class="form__error-input-msg">El vehiculo solo puede contener letras y espacios</p>
+             `
                 </div>   
 
 
